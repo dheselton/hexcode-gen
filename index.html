@@ -1,60 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Color Picker</title>
-        <style>
-            body {
-                font-family: "Montserrat", sans-serif;
-                text-align: center;
-            }
-            h1 {
-                margin-top: 0;
-            }
-            #primary-color {
-                width: 100px;
-                height: 100px;
-                margin: 0 auto;
-                background-color: #ffffff;
-                border: 1px solid #000000;
-            }
-            #color-input {
-                display: block;
-                margin: 20px auto;
-                font-family: "Montserrat", sans-serif;
-                padding: 10px;
-                border: 1px solid #000000;
-                border-radius: 5px;
-            }
-            button {
-                display: block;
-                margin: 20px auto;
-                font-family: "Montserrat", sans-serif;
-                padding: 10px 20px;
-                background-color: #0b3555;
-                color: #ffffff;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-        </style>
-        <link
-            href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
-            rel="stylesheet" />
-    </head>
-    <body>
-        <h1>Primary color</h1>
-        <div id="primary-color"></div>
-        <input
-            type="text"
-            id="color-input"
-            placeholder="Enter hex color code" />
-        <button onclick="changeColor()">Change color</button>
-        <script>
-            function changeColor() {
-                var colorInput = document.getElementById("color-input").value;
-                var primaryColor = document.getElementById("primary-color");
-                primaryColor.style.backgroundColor = colorInput;
-            }
-        </script>
-    </body>
+  <head>
+    <title>Color Picker</title>
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+      }
+      h1 {
+        margin-top: 0;
+      }
+      #primary-color {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border: 1px solid #000000;
+      }
+      #color-input {
+        display: block;
+        margin: 20px auto;
+        font-family: 'Montserrat', sans-serif;
+        padding: 10px;
+        border: 1px solid #000000;
+        border-radius: 5px;
+      }
+      button {
+        display: block;
+        margin: 20px auto;
+        font-family: 'Montserrat', sans-serif;
+        padding: 10px 20px;
+        background-color: #008CBA;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Primary color</h1>
+    <div id="primary-color"></div>
+    <input type="text" id="color-input" placeholder="Enter hex color code">
+    <button onclick="changeColor()">Change color</button>
+    <script>
+      // Retrieve saved color from localStorage
+      var savedColor = localStorage.getItem("color");
+      if (savedColor) {
+        var primaryColor = document.getElementById("primary-color");
+        primaryColor.style.backgroundColor = savedColor;
+        document.getElementById("color-input").value = savedColor;
+      }
+      function changeColor() {
+        var colorInput = document.getElementById("color-input").value;
+        var primaryColor = document.getElementById("primary-color");
+        primaryColor.style.backgroundColor = colorInput;
+        // Save color to localStorage
+        localStorage.setItem("color", colorInput);
+      }
+    </script>
+  </body>
 </html>
