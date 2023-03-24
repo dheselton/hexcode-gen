@@ -45,19 +45,25 @@
     <input type="text" id="color-input" placeholder="Enter hex color code">
     <button onclick="changeColor()">Change color</button>
     <script>
-      // Retrieve saved color from localStorage
-      var savedColor = localStorage.getItem("color");
-      if (savedColor) {
-        var primaryColor = document.getElementById("primary-color");
-        primaryColor.style.backgroundColor = savedColor;
-        document.getElementById("color-input").value = savedColor;
-      }
       function changeColor() {
         var colorInput = document.getElementById("color-input").value;
         var primaryColor = document.getElementById("primary-color");
         primaryColor.style.backgroundColor = colorInput;
-        // Save color to localStorage
-        localStorage.setItem("color", colorInput);
+        // Add query string to URL
+        var queryString = "?color=" + encodeURIComponent(colorInput);
+        history.pushState(null, null, queryString);
+      }
+
+      // Retrieve saved color from query string in URL
+      var queryString = window.location.search;
+      if (queryString) {
+        var params = new URLSearchParams(queryString);
+        var savedColor = params.get("color");
+        if (savedColor) {
+          var primaryColor = document.getElementById("primary-color");
+          primaryColor.style.backgroundColor = savedColor;
+          document.getElementById("color-input").value = savedColor;
+        }
       }
     </script>
   </body>
